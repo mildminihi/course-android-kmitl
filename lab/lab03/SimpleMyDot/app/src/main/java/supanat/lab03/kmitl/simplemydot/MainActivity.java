@@ -28,6 +28,17 @@ public class MainActivity extends AppCompatActivity implements Dot.DotChangedLis
         listDot = new ArrayList<>();
         dotView = (DotView) findViewById(R.id.dotView);
         Button clear = (Button) findViewById(R.id.button);
+        Button undo = (Button) findViewById(R.id.undoButton);
+        undo.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                if (listDot.size()!= 0) {
+                    listDot.remove(listDot.size() - 1);
+                    dotView.invalidate();
+                }
+            }
+        });
         clear.setOnClickListener(new View.OnClickListener() {
             //Click to clear
             @Override
