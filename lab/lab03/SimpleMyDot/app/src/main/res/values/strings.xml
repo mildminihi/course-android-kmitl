@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">SimpleMyDot</string>
+    <string name="random_dot">Random The Dot!</string>
+    <string name="clear_dot">Clear All Dot!</string>
+</resources>
