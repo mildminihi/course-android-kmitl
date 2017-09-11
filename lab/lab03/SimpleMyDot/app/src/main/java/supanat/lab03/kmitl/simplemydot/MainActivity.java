@@ -1,16 +1,16 @@
 package supanat.lab03.kmitl.simplemydot;
 
-import android.graphics.Canvas;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.StringTokenizer;
 
 import supanat.lab03.kmitl.simplemydot.model.Dot;
 import supanat.lab03.kmitl.simplemydot.view.DotView;
@@ -80,7 +80,6 @@ public class MainActivity extends AppCompatActivity implements Dot.DotChangedLis
     public void onRandomDot(View view) {
         //Click button to random x y
         Random random = new Random();
-        int radius = random.nextInt(100);
         int centerX = random.nextInt(this.dotView.getWidth());
         int centerY = random.nextInt(this.dotView.getHeight());
         CreateDot(centerX, centerY);

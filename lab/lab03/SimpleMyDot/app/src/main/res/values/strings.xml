@@ -3,4 +3,5 @@
     <string name="random_dot">Random The Dot!</string>
     <string name="clear_dot">Clear All Dot!</string>
     <string name="undo_dot">Undo!</string>
+    <string name="title_activity_secondactivity">secondactivity</string>
 </resources>
