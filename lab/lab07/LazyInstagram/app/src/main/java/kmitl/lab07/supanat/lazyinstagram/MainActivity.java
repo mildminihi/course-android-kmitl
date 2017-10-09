@@ -28,10 +28,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getUserProfile(getIntent().getStringExtra("user"));
 
-        PostAdapter postAdapter = new PostAdapter(this);
-        RecyclerView recyclerView = findViewById(R.id.list);
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
-        recyclerView.setAdapter(postAdapter);
+
+
+
     }
     public void onLogout(View view){
         finish();
@@ -55,19 +54,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<UserProfile> call, Response<UserProfile> response) {
                 if (response.isSuccessful()){
-                    UserProfile userProfile = response.body();
-                    TextView textView = (TextView)findViewById(R.id.textName);
-                    textView.setText(userProfile.getUser());
-                    TextView textbio = (TextView) findViewById(R.id.textBio);
-                    textbio.setText(userProfile.getBio());
-                    TextView textpost = (TextView) findViewById(R.id.textPost);
-                    TextView textfollower = (TextView) findViewById(R.id.textFollower);
-                    TextView textfollowing = (TextView) findViewById(R.id.textFollowing);
-                    textpost.setText("Post\n"+userProfile.getPost());
-                    textfollower.setText("Follower\n"+userProfile.getFollower());
-                    textfollowing.setText("Following\n"+userProfile.getFollowing());
-                    ImageView imageView = (ImageView)findViewById(R.id.imageView);
-                    Glide.with(MainActivity.this).load(userProfile.getUrlProfile()).into(imageView);
+                    display(response.body());
 
                 }
             }
@@ -77,5 +64,25 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+    public void display(UserProfile userProfile){
+        TextView textView = (TextView)findViewById(R.id.textName);
+        textView.setText(userProfile.getUser());
+        TextView textbio = (TextView) findViewById(R.id.textBio);
+        textbio.setText(userProfile.getBio());
+        TextView textpost = (TextView) findViewById(R.id.textPost);
+        TextView textfollower = (TextView) findViewById(R.id.textFollower);
+        TextView textfollowing = (TextView) findViewById(R.id.textFollowing);
+        textpost.setText("Post\n"+userProfile.getPost());
+        textfollower.setText("Follower\n"+userProfile.getFollower());
+        textfollowing.setText("Following\n"+userProfile.getFollowing());
+        ImageView imageView = (ImageView)findViewById(R.id.imageView);
+        Glide.with(MainActivity.this).load(userProfile.getUrlProfile()).into(imageView);
+
+        PostAdapter postAdapter = new PostAdapter(this);
+        RecyclerView recyclerView = findViewById(R.id.list);
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
+        postAdapter.setData(userProfile.getPosts());
+        recyclerView.setAdapter(postAdapter);
     }
 }

@@ -1,5 +1,7 @@
 package kmitl.lab07.supanat.lazyinstagram.api;
 
+import java.util.List;
+
 /**
  * Created by mild supanat on 6/10/2560.
  */
@@ -9,16 +11,15 @@ public class UserProfile {
     private String bio;
     private String follower, following, post;
     private String urlProfile;
+    private List<PostModel> posts;
 
-    public String[] getPosts() {
+    public List<PostModel> getPosts() {
         return posts;
     }
 
-    public void setPosts(String[] posts) {
+    public void setPosts(List<PostModel> posts) {
         this.posts = posts;
     }
-
-    private String[] posts;
 
     public String getUrlProfile() {
         return urlProfile;

@@ -9,32 +9,30 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import kmitl.lab07.supanat.lazyinstagram.R;
+import kmitl.lab07.supanat.lazyinstagram.api.PostModel;
 
 /**
  * Created by mild supanat on 6/10/2560.
  */
 
-class Holder extends RecyclerView.ViewHolder {//ขั้นตอน recycler view ต้องมี holder
-    public ImageView image;
-    public Holder(View itemView) {
-        super(itemView);
-        image = itemView.findViewById(R.id.image);
-    }
-}
 
-public class PostAdapter extends RecyclerView.Adapter<Holder>{
 
-    String[] data = {
-            "https://raw.githubusercontent.com/iangkub/gitdemo/master/cartoon/01.jpg",
-            "https://raw.githubusercontent.com/iangkub/gitdemo/master/cartoon/02.jpg",
-            "https://raw.githubusercontent.com/iangkub/gitdemo/master/cartoon/03.jpg",
-            "https://raw.githubusercontent.com/iangkub/gitdemo/master/cartoon/04.jpg"
-    };
+public class PostAdapter extends RecyclerView.Adapter<PostAdapter.Holder>{
+
 
     private Context context;
+    private List<PostModel> data;
     public PostAdapter(Context context){
         this.context = context;
+        data = new ArrayList<>();
+
+    }
+    public void setData(List<PostModel> data){
+        this.data = data;
     }
 
 
@@ -47,16 +45,24 @@ public class PostAdapter extends RecyclerView.Adapter<Holder>{
     }
 
     @Override
-    public void onBindViewHolder(Holder holder, int position) {//บอกตำแหน่ง
+    public void onBindViewHolder(PostAdapter.Holder holder, int position) {
         ImageView image = holder.image;
-        Glide.with(context).load(data[position]).into(image);
-
+        String imageUrl = data.get(position).getUrl();
+        Glide.with(context).load(imageUrl).into(image);
     }
+
 
     @Override
     public int getItemCount() {//บอกว่าเรามีข้อมูลเท่าไหร่
-        return data.length;//จำนวนข้อมูล
+        return data.size();//จำนวนข้อมูล
     }
 
 
+    static class Holder extends RecyclerView.ViewHolder{
+        ImageView image;
+        public Holder(View itemView) {
+            super(itemView);
+            image = itemView.findViewById(R.id.image);
+        }
+    }
 }
