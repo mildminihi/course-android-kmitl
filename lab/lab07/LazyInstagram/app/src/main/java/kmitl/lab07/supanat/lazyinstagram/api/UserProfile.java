@@ -10,6 +10,16 @@ public class UserProfile {
     private String follower, following, post;
     private String urlProfile;
 
+    public String[] getPosts() {
+        return posts;
+    }
+
+    public void setPosts(String[] posts) {
+        this.posts = posts;
+    }
+
+    private String[] posts;
+
     public String getUrlProfile() {
         return urlProfile;
     }

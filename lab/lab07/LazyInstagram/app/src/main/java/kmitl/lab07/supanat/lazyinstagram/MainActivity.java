@@ -1,9 +1,10 @@
 package kmitl.lab07.supanat.lazyinstagram;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,12 +26,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getUserProfile("cartoon");
+        getUserProfile(getIntent().getStringExtra("user"));
 
         PostAdapter postAdapter = new PostAdapter(this);
         RecyclerView recyclerView = findViewById(R.id.list);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
         recyclerView.setAdapter(postAdapter);
+    }
+    public void onLogout(View view){
+        finish();
     }
 
     private void getUserProfile(final String userName) {
