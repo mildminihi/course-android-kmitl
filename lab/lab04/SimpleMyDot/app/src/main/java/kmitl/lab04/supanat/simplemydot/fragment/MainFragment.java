@@ -67,6 +67,7 @@ public class MainFragment extends Fragment implements Dots.OnDotsChangeListener,
         return rootView;
     }
 
+
     @Override
     public void onDotsChanged(Dots dots) {
         dotView.setDots(dots);
@@ -149,13 +150,11 @@ public class MainFragment extends Fragment implements Dots.OnDotsChangeListener,
         }
     }
     public void ClickShare() {
-        //Permission
+
         if (askPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, WRITE_EXTERNAL_REQUEST_CODE)) {
-            //Screenshot
             Bitmap image = Screenshot.takescreenshotOfRootView(imageView);
             Uri screenshotUri = Screenshot.getImageUri(this.getContext(), image);
 
-            //Share
             createShareIntent(screenshotUri);
         }
     }
