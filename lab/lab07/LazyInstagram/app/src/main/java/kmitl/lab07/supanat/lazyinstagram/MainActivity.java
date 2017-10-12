@@ -23,12 +23,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
     private int layoutCheck = 0;
+    private String user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getUserProfile(getIntent().getStringExtra("user"));
+        user = getIntent().getStringExtra("user");
+        getUserProfile(user);
 
 
 
@@ -101,12 +103,12 @@ public class MainActivity extends AppCompatActivity {
     public void onChange (View view){
         if(layoutCheck == 0){
            layoutCheck = 1;
-            getUserProfile(getIntent().getStringExtra("user"));
+            getUserProfile(user);
 
         }
         else {
             layoutCheck = 0;
-            getUserProfile(getIntent().getStringExtra("user"));
+            getUserProfile(user);
         }
     }
 
