@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
@@ -31,8 +32,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.Holder>{
         data = new ArrayList<>();
 
     }
-    public void setData(List<PostModel> data){
+
+    public void setData(List<PostModel> data) {
         this.data = data;
+
     }
 
 
@@ -49,6 +52,13 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.Holder>{
         ImageView image = holder.image;
         String imageUrl = data.get(position).getUrl();
         Glide.with(context).load(imageUrl).into(image);
+        TextView like = holder.like;
+        int numLike = data.get(position).getLike();
+        like.setText(Integer.toString(numLike));
+        TextView comment = holder.comment;
+        int numComment = data.get(position).getComment();
+        comment.setText(Integer.toString(numComment));
+
     }
 
 
@@ -60,9 +70,13 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.Holder>{
 
     static class Holder extends RecyclerView.ViewHolder{
         ImageView image;
+        public TextView like;
+        public TextView comment;
         public Holder(View itemView) {
             super(itemView);
             image = itemView.findViewById(R.id.image);
+            like = (TextView) itemView.findViewById(R.id.like);
+            comment = (TextView) itemView.findViewById(R.id.comment);
         }
     }
 }

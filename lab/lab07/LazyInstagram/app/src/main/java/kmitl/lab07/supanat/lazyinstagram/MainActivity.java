@@ -3,6 +3,7 @@ package kmitl.lab07.supanat.lazyinstagram;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -21,6 +22,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
+    private int layoutCheck = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,11 +80,34 @@ public class MainActivity extends AppCompatActivity {
         textfollowing.setText("Following\n"+userProfile.getFollowing());
         ImageView imageView = (ImageView)findViewById(R.id.imageView);
         Glide.with(MainActivity.this).load(userProfile.getUrlProfile()).into(imageView);
+        if(layoutCheck == 0) {
+            PostAdapter postAdapter = new PostAdapter(this);
+            RecyclerView recyclerView = findViewById(R.id.list);
+            recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
+            postAdapter.setData(userProfile.getPosts());
+            recyclerView.setAdapter(postAdapter);
 
-        PostAdapter postAdapter = new PostAdapter(this);
-        RecyclerView recyclerView = findViewById(R.id.list);
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
-        postAdapter.setData(userProfile.getPosts());
-        recyclerView.setAdapter(postAdapter);
+
+        }
+        else {
+            PostAdapter postAdapter = new PostAdapter(this);
+            RecyclerView recyclerView = findViewById(R.id.list);
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            postAdapter.setData(userProfile.getPosts());
+            recyclerView.setAdapter(postAdapter);
+        }
+
+        }
+    public void onChange (View view){
+        if(layoutCheck == 0){
+           layoutCheck = 1;
+            getUserProfile(getIntent().getStringExtra("user"));
+
+        }
+        else {
+            layoutCheck = 0;
+            getUserProfile(getIntent().getStringExtra("user"));
+        }
     }
+
 }
