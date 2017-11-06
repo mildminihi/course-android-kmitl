@@ -11,10 +11,15 @@ import java.util.List;
  */
 
 @Dao
-public interface MessageInfoDAO {
-    @Query("SELECT * FROM INCOME")
-    List<Moneytable> findAll();
+interface MessageInfoDAO {
+    @Query("SELECT * FROM MONEYTABLE")
+    List<MoneyTableResult> findAll();
+
+    @Query("SELECT SUM(MONEY) AS totalincome FROM MONEYTABLE WHERE TYPE = '+'")
+    public abstract String findIncome();
+
+
 
     @Insert
-    void insert(Moneytable moneytable);
+    void insert(MoneyTableResult moneyTableResult);
 }

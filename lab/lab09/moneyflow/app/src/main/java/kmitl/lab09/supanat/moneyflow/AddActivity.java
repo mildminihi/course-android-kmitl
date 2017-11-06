@@ -12,6 +12,7 @@ import android.widget.EditText;
 public class AddActivity extends AppCompatActivity {
 
     private int typeCheck = 0;
+    public String type;
 
 
 
@@ -60,24 +61,32 @@ public class AddActivity extends AppCompatActivity {
     public void onSave(View view){
         EditText state = (EditText)findViewById(R.id.editText);
         EditText money = (EditText)findViewById(R.id.editText2);
+
+        if (typeCheck == 1){
+            type = "+";
+        }
+        else if (typeCheck == 2){
+            type = "-";
+        }
+
         final String list = state.getText().toString();
         final int moneyResult = Integer.parseInt(money.getText().toString());
         final MessageDB messageDB = Room.databaseBuilder(getApplicationContext(),
-                MessageDB.class, "INCOME").build();
+                MessageDB.class, "MONEYTABLE").build();
 
-        new AsyncTask<Void, Void, Moneytable>(){
+        new AsyncTask<Void, Void, MoneyTableResult>(){
 
             @Override
-            protected Moneytable doInBackground(Void... voids) {
+            protected MoneyTableResult doInBackground(Void... voids) {
 
 
-                Moneytable moneytable = new Moneytable();
-                moneytable.setType(1);
-                moneytable.setState(list);
-                moneytable.setMoney(moneyResult);
+                MoneyTableResult moneyTableResult = new MoneyTableResult();
+                moneyTableResult.setType(type);
+                moneyTableResult.setState(list);
+                moneyTableResult.setMoney(moneyResult);
 
 
-                messageDB.getMessageInfoDAO().insert(moneytable);
+                messageDB.getMessageInfoDAO().insert(moneyTableResult);
 
                 return null;
             }

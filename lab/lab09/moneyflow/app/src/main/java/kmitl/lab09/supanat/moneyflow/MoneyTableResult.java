@@ -5,23 +5,28 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
 /**
- * Created by mild supanat on 5/11/2560.
+ * Created by mild supanat on 6/11/2560.
  */
 
-@Entity(tableName = "INCOME")
-public class Moneytable {
+@Entity(tableName = "MONEYTABLE")
+public class MoneyTableResult {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
 
     @ColumnInfo(name = "TYPE")
-    private int type;
+    private String type;
 
     @ColumnInfo(name = "STATE")
     private String state;
 
     @ColumnInfo(name = "MONEY")
     private int money;
+
+    @Override
+    public String toString(){
+        return String.format("%s : %s: %d", type, state, money);
+    }
 
     public int getId() {
         return id;
@@ -31,11 +36,11 @@ public class Moneytable {
         this.id = id;
     }
 
-    public int getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(String type) {
         this.type = type;
     }
 
