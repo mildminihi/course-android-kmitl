@@ -8,28 +8,23 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity{
     private MessageDB messageDB;
 
     private MoneyTableResult moneytableresult;
+    private int EIEI = 999;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         getSupportActionBar().setTitle("Money Flow Table");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         showResult();
-
-        Button btn_Update = (Button)findViewById(R.id.buttonUpdate);
-
-        btn_Update.setOnClickListener(this);
-
-
     }
 
     public void showResult(){
@@ -40,37 +35,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             protected List<MoneyTableResult> doInBackground(Void... voids) {
-
                 List<MoneyTableResult> result = messageDB.getMessageInfoDAO().findAll();
-
-
                 return result;
             }
 
             @Override
             protected void onPostExecute(List<MoneyTableResult> moneytables){
                 int totalIncome = 0, totalBalance = 0;
-                for (MoneyTableResult r : moneytables) {
+                for (MoneyTableResult table : moneytables) {
 
-
-
-                    if (r.getType().equals("+")) {
-                        totalIncome += r.getMoney();
-                        totalBalance += r.getMoney();
-                    } else totalBalance -= r.getMoney();
+                    if (table.getType().equals("+")) {
+                        totalIncome += table.getMoney();
+                        totalBalance += table.getMoney();
+                    } else totalBalance -= table.getMoney();
                     TextView textAmount = (TextView)findViewById(R.id.textCurrently);
 
-                    float ratio;
-                    try {
-                        ratio = totalBalance / totalIncome;
-                    } catch (ArithmeticException e) {
-                        ratio = 0;
-                    }
-                    System.out.println(ratio);
-                    if (ratio > 0.5) {
+                    if (totalBalance > 0.5*totalIncome) {
                         textAmount.setTextColor(Color.GREEN);
-                        System.out.println(ratio);
-                    } else if (ratio >= 0.25) {
+
+                    } else if (totalBalance >= 0.25*totalIncome) {
                         textAmount.setTextColor(Color.YELLOW);
                     } else {
                         textAmount.setTextColor(Color.RED);
@@ -87,15 +70,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }.execute();
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
 
-            case R.id.buttonUpdate:
-                showResult();
-                break;
-        }
-    }
 
 
 
@@ -103,7 +78,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onAdd(View view){
         Intent intent = new Intent(MainActivity.this, AddActivity.class);
 
-        startActivity(intent);
+        startActivityForResult(intent, EIEI);
         showResult();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == EIEI && resultCode == RESULT_OK){
+            showResult();
+        }
     }
 }

@@ -25,9 +25,10 @@
         android:layout_height="48dp"
         android:layout_marginLeft="0dp"
         android:layout_marginTop="35dp"
-        android:background="@android:color/darker_gray"
+        android:background="@android:color/black"
         android:onClick="onIncome"
         android:text="รายรับ"
+        android:textColor="@android:color/background_light"
         app:layout_constraintLeft_toLeftOf="@+id/textType"
         app:layout_constraintTop_toBottomOf="@+id/textType" />
 
@@ -37,9 +38,10 @@
         android:layout_height="48dp"
         android:layout_marginLeft="1dp"
         android:layout_marginTop="0dp"
-        android:background="@android:color/darker_gray"
+        android:background="@android:color/black"
         android:onClick="onOutcome"
         android:text="รายจ่าย"
+        android:textColor="@android:color/background_light"
         app:layout_constraintLeft_toRightOf="@+id/buttonIncome"
         app:layout_constraintTop_toTopOf="@+id/buttonIncome" />
 
@@ -95,8 +97,10 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="117dp"
         android:layout_marginTop="35dp"
+        android:background="@color/colorPrimary"
         android:onClick="onSave"
         android:text="บันทึก"
+        android:textColor="@android:color/background_light"
         app:layout_constraintLeft_toLeftOf="@+id/editText2"
         app:layout_constraintTop_toBottomOf="@+id/editText2" />
 </android.support.constraint.ConstraintLayout>
