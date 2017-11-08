@@ -18,6 +18,7 @@ public class AddActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getSupportActionBar().setTitle("Add Statement");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
 
@@ -93,5 +94,8 @@ public class AddActivity extends AppCompatActivity {
         }.execute();
         finish();
     }
+
+
+
 
 }

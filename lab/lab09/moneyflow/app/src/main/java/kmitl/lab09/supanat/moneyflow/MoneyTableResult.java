@@ -25,7 +25,7 @@ public class MoneyTableResult {
 
     @Override
     public String toString(){
-        return String.format("%s : %s: %d", type, state, money);
+        return String.format("%s | %s | %d", type, state, money);
     }
 
     public int getId() {
