@@ -1,7 +1,6 @@
 package kmitl.lab09.supanat.moneyflow;
 
 import android.arch.persistence.room.Dao;
-import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 
@@ -17,8 +16,8 @@ interface MessageInfoDAO {
     List<MoneyTableResult> findAll();
 
 
-    @Delete
-    void delete(MoneyTableResult moneyTableResult);
+    @Query("DELETE FROM MONEYTABLE")
+    void deleteAll();
 
     @Insert
     void insert(MoneyTableResult moneyTableResult);

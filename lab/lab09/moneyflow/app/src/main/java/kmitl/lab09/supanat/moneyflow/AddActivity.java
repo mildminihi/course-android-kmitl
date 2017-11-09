@@ -72,10 +72,10 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
         EditText money = (EditText)findViewById(R.id.editText2);
 
         if (typeCheck == 1){
-            type = "+";
+            type = "Income";
         }
         else if (typeCheck == 2){
-            type = "-";
+            type = "Expense";
         }
 
 
