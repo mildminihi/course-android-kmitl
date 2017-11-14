@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity{
 
 
 
-    private int EIEI = 999;
+    private int REQUEST_VALUE = 999;
 
 
     @Override
@@ -100,14 +100,14 @@ public class MainActivity extends AppCompatActivity{
     public void onAdd(View view){
         Intent intent = new Intent(MainActivity.this, AddActivity.class);
 
-        startActivityForResult(intent, EIEI);
+        startActivityForResult(intent, REQUEST_VALUE);
         showResult();
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == EIEI && resultCode == RESULT_OK){
+        if (requestCode == REQUEST_VALUE && resultCode == RESULT_OK){
             showResult();
         }
     }
