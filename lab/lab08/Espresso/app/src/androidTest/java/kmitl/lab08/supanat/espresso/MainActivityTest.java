@@ -154,13 +154,6 @@ public class MainActivityTest {
         //โดยกรอก Name=Prayoch และ Age=60 กดปุ่ม ADDED และกด GO TO LIST จะต้องเจอ Prayoch อายุ 60 ใน ListView ลำดับที่ 4
     }
 
-    @Test
-    public void Test10() {
-        onView(allOf(withId(R.id.buttonGotoList), withText("GO TO LIST"))).perform(click());
-        onView(allOf(withId(R.id.buttonClearList), withText("CLEAR lIST"))).perform(click());
-        onView(withText("Not Found")).check(matches(isDisplayed()));
-        //เมื่อกด clear list จะขึ้นข้อความว่า Not Found
-    }
 
 
 }
